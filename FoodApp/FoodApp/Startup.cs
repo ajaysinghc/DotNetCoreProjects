@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing;
 
 namespace FoodApp
 {
@@ -33,11 +34,14 @@ namespace FoodApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
             //default static page is index.html if nothing specified
             //app.UseDefaultFiles();
             //Allow serving up static files
             app.UseStaticFiles();
+
+            //Add MVC with routs defined
+            app.UseMvc(configureRoutes);
 
 
             app.Use(next => {
@@ -65,6 +69,11 @@ namespace FoodApp
                 greeting = greetMessage.getMessage();
                 await context.Response.WriteAsync(greeting);
             });
+        }
+
+        private void configureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute("Default", "{Controller=Home}/{Action=Index}");
         }
     }
 }
