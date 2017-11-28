@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FoodApp
 {
@@ -23,12 +24,38 @@ namespace FoodApp
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
                               IConfiguration configuration,
-                              IGreetMessage greetMessage)
+                              IGreetMessage greetMessage,
+                              ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //default static page is index.html if nothing specified
+            //app.UseDefaultFiles();
+            //Allow serving up static files
+            app.UseStaticFiles();
+
+
+            app.Use(next => {
+                return async context =>
+                {
+                    logger.LogInformation("Incoming request ");
+                    if (context.Request.Path.StartsWithSegments("/mvm"))
+                        await context.Response.WriteAsync("Hit my code in pipe line");
+                    else
+                    {
+                        await next(context);
+                        logger.LogInformation("response outgoing");
+                    }
+                };
+            });
+
+            app.UseWelcomePage(new WelcomePageOptions
+            {
+                Path = "/wp"
+            });
 
             app.Run(async (context) =>
             {
