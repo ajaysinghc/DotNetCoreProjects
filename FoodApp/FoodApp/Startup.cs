@@ -18,6 +18,7 @@ namespace FoodApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreetMessage, GreetMessage>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +33,7 @@ namespace FoodApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMvcWithDefaultRoute();
             //default static page is index.html if nothing specified
             //app.UseDefaultFiles();
             //Allow serving up static files
