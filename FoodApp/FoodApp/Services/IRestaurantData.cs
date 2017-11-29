@@ -6,5 +6,6 @@ namespace FoodApp.Services
     public interface IRestaurantData
     {
         IEnumerable<Restaurant> GetAll();
+        Restaurant GetRestaurant(int restaurantId);
     }
 }

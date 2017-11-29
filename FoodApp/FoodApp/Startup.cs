@@ -72,7 +72,7 @@ namespace FoodApp
 
         private void configureRoutes(IRouteBuilder routeBuilder)
         {
-            routeBuilder.MapRoute("Default", "{Controller=Home}/{Action=Index}");
+            routeBuilder.MapRoute("Default", "{Controller=Home}/{Action=Index}/{id?}");
         }
     }
 }

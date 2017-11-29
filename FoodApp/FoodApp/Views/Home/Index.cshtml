@@ -1,15 +1,20 @@
-﻿@model IEnumerable<FoodApp.Models.Restaurant>
+﻿@model FoodApp.ViewModels.HomeIndexViewModel
 <!DOCTYPE html>
 <html>
 <head>
     <title>Food</title>
 </head>
 <body>
-    <h3> Welcome</h3>
+    <h3> @Model.Message</h3>
     <br />
-    @foreach (var restaurant in Model)
+    @foreach (var restaurant in Model.Restaurants)
     {
-        <p> @restaurant.Id  @restaurant.Name</p>
+        <p>
+            @restaurant.Id  @restaurant.Name
+            <a href="Home/Details/@restaurant.Id">Details</a>
+            @Html.ActionLink("Go", "Details", new { id = restaurant.Id })
+            <a asp-action="Details" asp-route-id="@restaurant.Id">Check Details</a>
+        </p>
     }
 </body>
 </html>
