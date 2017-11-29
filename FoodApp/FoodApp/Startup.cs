@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FoodApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace FoodApp
 {
@@ -19,6 +16,7 @@ namespace FoodApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreetMessage, GreetMessage>();
+            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 
@@ -44,7 +42,8 @@ namespace FoodApp
             app.UseMvc(configureRoutes);
 
 
-            app.Use(next => {
+            app.Use(next =>
+            {
                 return async context =>
                 {
                     logger.LogInformation("Incoming request ");

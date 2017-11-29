@@ -1,4 +1,4 @@
-﻿namespace FoodApp
+﻿namespace FoodApp.Services
 {
     public interface IGreetMessage
     {

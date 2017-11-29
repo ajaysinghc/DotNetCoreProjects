@@ -1,10 +1,15 @@
-﻿
+﻿@model IEnumerable<FoodApp.Models.Restaurant>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Food</title>
 </head>
 <body>
-    <p>Welcome to @Model.Name</p>
+    <h3> Welcome</h3>
+    <br />
+    @foreach (var restaurant in Model)
+    {
+        <p> @restaurant.Id  @restaurant.Name</p>
+    }
 </body>
 </html>
