@@ -8,7 +8,7 @@ namespace FoodApp.Controllers
         public ActionResult Index()
         {
             var restaurant = new Restaurant { Id = 1, Name = "Place to eat" };
-            return new ObjectResult(restaurant);
+            return View(restaurant);
         }
     }
 }
