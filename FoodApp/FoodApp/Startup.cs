@@ -16,7 +16,7 @@ namespace FoodApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreetMessage, GreetMessage>();
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 

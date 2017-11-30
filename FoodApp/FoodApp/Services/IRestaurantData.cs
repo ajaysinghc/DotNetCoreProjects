@@ -7,5 +7,6 @@ namespace FoodApp.Services
     {
         IEnumerable<Restaurant> GetAll();
         Restaurant GetRestaurant(int restaurantId);
+        Restaurant Add(Restaurant newRestaurant);
     }
 }

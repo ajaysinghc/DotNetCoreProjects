@@ -1,0 +1,18 @@
+﻿@model FoodApp.ViewModels.RestaurantEditViewModel
+<h1>Create</h1>
+<form method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Cuisine"></label>
+        <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<FoodApp.Models.CuisineType>()"></select>
+        <span asp-validation-for="Cuisine"></span>
+    </div>
+    <div>
+        <input type="submit" value="Save" name="save" />
+    </div>
+</form>
+<a asp-action="Index">Back to List</a>

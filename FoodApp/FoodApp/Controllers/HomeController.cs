@@ -1,4 +1,5 @@
-﻿using FoodApp.Services;
+﻿using FoodApp.Models;
+using FoodApp.Services;
 using FoodApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,27 @@ namespace FoodApp.Controllers
 
             return View(model);
 
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(RestaurantEditViewModel restaurant)
+        {
+            if (ModelState.IsValid)
+            {
+                var newRestaurant = new Restaurant { Name = restaurant.Name, Cuisine = restaurant.Cuisine };
+
+                newRestaurant = _restaurantData.Add(newRestaurant);
+
+                return RedirectToAction(nameof(Details), new { id = newRestaurant.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
