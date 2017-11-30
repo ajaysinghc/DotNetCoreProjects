@@ -1,8 +1,10 @@
-﻿using FoodApp.Services;
+﻿using FoodApp.Data;
+using FoodApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,19 +13,26 @@ namespace FoodApp
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreetMessage, GreetMessage>();
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddDbContext<FoodAppDbContext>(options =>
+            options.UseSqlServer(_configuration.GetConnectionString("FoodApp")));
+            services.AddScoped<IRestaurantData, SqlServerRestaurantData>();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
-                              IConfiguration configuration,
                               IGreetMessage greetMessage,
                               ILogger<Startup> logger)
         {
@@ -64,7 +73,7 @@ namespace FoodApp
 
             app.Run(async (context) =>
             {
-                var greeting = configuration["Greeting"];
+                var greeting = _configuration["Greeting"];
                 greeting = greetMessage.getMessage();
                 await context.Response.WriteAsync(greeting);
             });
