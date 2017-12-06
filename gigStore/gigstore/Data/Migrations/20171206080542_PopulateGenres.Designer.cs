@@ -11,8 +11,8 @@ using System;
 namespace gigstore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171205132722_SqlServer")]
-    partial class SqlServer
+    [Migration("20171206080542_PopulateGenres")]
+    partial class PopulateGenres
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
