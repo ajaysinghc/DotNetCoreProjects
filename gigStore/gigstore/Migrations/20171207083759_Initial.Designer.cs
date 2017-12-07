@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace gigstore.Data.Migrations
+namespace gigstore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171206080542_PopulateGenres")]
-    partial class PopulateGenres
+    [Migration("20171207083759_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,13 +88,15 @@ namespace gigstore.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<byte?>("GenreId");
+                    b.Property<byte>("GenreId");
 
-                    b.Property<string>("Venue");
+                    b.Property<string>("Venue")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -217,11 +219,13 @@ namespace gigstore.Data.Migrations
                 {
                     b.HasOne("gigstore.Models.ApplicationUser", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("gigstore.Models.Genre", "Genre")
                         .WithMany()
-                        .HasForeignKey("GenreId");
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
