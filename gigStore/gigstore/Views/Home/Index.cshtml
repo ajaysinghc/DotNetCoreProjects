@@ -9,13 +9,16 @@
     @foreach(var gig in Model)
     {
       <li>
-          <div class="venue">
+          <div class="venue">  
+            @gig.Venue  
             <div class="date">
-              @gig.Venue -- @gig.DateTime.ToString("d MMM yyyy") 
-            </div>
-            <div class="detail">
-              @gig.Artist.UserName --@gig.Genre.Name
-            </div>
+               @gig.DateTime.ToString("d MMM") 
+          </div>       
+          </div>
+          
+          <div class="detail">
+              <span class="artist">@gig.Artist.UserName </span>
+              <span class="genre">@gig.Genre.Name</span>
           </div>
       </li>   
     }

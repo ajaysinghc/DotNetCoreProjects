@@ -41,15 +41,39 @@ ul.giggs
     list-style: none
 }
 
-div.venue
-{
+.giggs > li {
     position: relative;
-    border-width: 1px;    
+    margin: 20px
+}
+
+.giggs >li .venue{
+    background-color: #F44336;
+   text-align: center;
+   text-transform: uppercase;
+    color: white;
+    width: 40px;
+    border-radius: 8px;
+    padding-top: 3px
+}
+
+.giggs >li .date{
+    background-color: grey;
+}
+
+.giggs > li .detail {
+    position: absolute;
+    left: 50px;
+    top:8px
+    
     
 }
-div.date .detail
-{
-    position: relative
+
+.giggs > li  .artist{
+    display: block;
+    font-weight: bold
+}
+.giggs > li  .genre{
+   font-size: 12px;
 }
 
 /*Bootstrap overrides */
