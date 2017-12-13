@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create Gig";
 }
 
-<h1>Create Gig</h1>
+<h1>@Model.Title</h1>
 
 <form method="post">
     <p class="alert alert-info">All Fields are required</p>
@@ -30,6 +30,8 @@
         @Html.DropDownListFor(m=>m.Genre, new SelectList(Model.Genres,"Id", "Name"),"", new {@class="form-control"})
         <span asp-validation-for="Genre"></span>
     </div>
+
+    @Html.HiddenFor(m=>m.Id)
 
     <input type="Submit" class="btn btn-primary" value="Save">
     

@@ -24,7 +24,12 @@
           
                <div class="detail col-xs-4 col-sm-1 ">
                     <span class="artist">@gig.Artist.Name </span>
-                    <span class="genre">@gig.Genre.Name</span>                   
+                    <span class="genre">@gig.Genre.Name</span>
+                    <div class="row">
+                        <div class="editGig col-xs-8">
+                               <a asp-action="Edit" asp-controller="Gigs" asp-route-id = "@gig.Id">Edit</a>
+                        </div>
+                    </div>
                </div>
                
               </div>

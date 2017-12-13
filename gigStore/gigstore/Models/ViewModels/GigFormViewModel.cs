@@ -15,5 +15,9 @@ namespace gigstore.Models.ViewModels
         public byte Genre { get; set; }
         
         public IEnumerable<Genre> Genres { get; set; }
+
+        public string Title { get; set; }
+        public int Id { get; set; }
+
     }
 }
